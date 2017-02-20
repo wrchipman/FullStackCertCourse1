@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>William Chipman's Guessing Game</title>
+  </head>
+  <body onload="do_game()">
+    <script>
+      var colors_array = ["red", "blue", "green", "white", "orange", "black", "purple", "yellow"];
+      var random_color = colors_array[Math.floor(Math.random()*colors_array.length)];
+
+      function do_game() {
+        alert("For Debugging Purposes: \nThe color choice is " + random_color)
+        var number_of_guesses = 0;
+        do{
+          color_choice = prompt("I am thinking of one of these colors: \n"+
+                                colors_array.sort().join(", ") +
+                                ".\nCan you guess which one I'm thinking of??");
+          number_of_guesses++;
+        }while (!check_guess(color_choice))
+        myBody=document.getElementsByTagName("body")[0];
+        myBody.style.background=random_color;
+        alert("Great Job. You guessed it!!\n"+
+              "It took " + number_of_guesses + " guesses.")
+      }
+      function check_guess(color_choice) {
+        if (colors_array.indexOf(color_choice)<0) {
+            alert(color_choice + " is not a valid color choice.")
+            return false;
+        } else if (color_choice < random_color) {
+            alert(color_choice + " is alphabetically lower than my color.")
+            return false;
+        } else if (color_choice > random_color) {
+            alert(color_choice + " is alphabetically higher than my color.")
+            return false;
+        } else {
+            return true;
+        }
+      }
+    </script>
+  </body>
+</html>
